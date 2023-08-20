@@ -1,0 +1,1 @@
+# wazuh-discord-integration
