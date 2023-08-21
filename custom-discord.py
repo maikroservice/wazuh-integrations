@@ -4,6 +4,15 @@ import sys
 import requests
 requests.auth import HTTPBasicAuth
 
+"""
+ossec.conf configuration structure
+ <integration>
+     <name>custom-discord</name>
+     <hook_url>https://discord.com/api/webhooks/XXXXXXXXXXX</hook_url>
+     <alert_format>json</alert_format>
+ </integration>
+"""
+
 # read configuration
 alert_file = sys.argv[1]
 user = sys.argv[2].split(":")[0]
