@@ -11,7 +11,6 @@ ossec.conf configuration structure
      <name>custom-discord</name>
      <hook_url>https://discord.com/api/webhooks/XXXXXXXXXXX</hook_url>
      <alert_format>json</alert_format>
-     <options>JSON</options> <!-- Replace with your custom JSON object -->
  </integration>
 """
 
@@ -221,10 +220,10 @@ def generate_msg(alert: any, options: any) -> any:
     
     embeds             = []
     msg                = {}
-    msg['color']    = color
-    msg['pretext']  = "WAZUH Alert"
-    msg['title']    = alert['rule']['description'] if 'description' in alert['rule'] else "N/A"
-    msg['text']     = alert.get('full_log')
+    msg['color']       = color
+    msg['title']       = f"Wazuh Alert - Rule {alert['rule']['id']}",
+    msg['description'] = alert['rule']['description'] if 'description' in alert['rule'] else "N/A"
+    msg['text']        = alert.get('full_log')
 
     msg['fields']   = []
     if 'agent' in alert:
@@ -248,12 +247,7 @@ def generate_msg(alert: any, options: any) -> any:
 
     msg['ts']       = alert['id']
 
-    if(options):
-        msg.update(options)
-
-    attach = {'content': [msg]}
-
-    return json.dumps(attach)
+    return json.dumps(msg)
 
 def send_msg(msg: str, url: str) -> None:
     """
@@ -266,7 +260,7 @@ def send_msg(msg: str, url: str) -> None:
         url: str
             URL of the API.
     """
-    headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8'}
+    headers = {'content-type': 'application/json'}
     res     = requests.post(url, data=msg, headers=headers)
     debug("# Response received: %s" % res.json)
 
