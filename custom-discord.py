@@ -27,14 +27,14 @@ alert_level = alert_json["rule"]["level"]
 
 # colors from https://gist.github.com/thomasbnt/b6f455e2c7d743b796917fa3c205f812
 if(alert_level < 5):
-        # green
-        color = "5763719"
-    elif(alert_level >= 5 and alert_level <= 7):
-        # yellow
-        color = "16705372"
-    else:
-        # red
-        color = "15548997"
+    # green
+    color = "5763719"
+elif(alert_level >= 5 and alert_level <= 7):
+    # yellow
+    color = "16705372"
+else:
+    # red
+    color = "15548997"
 
 # agent details
 if "agentless" in alert_json:
@@ -60,5 +60,5 @@ payload = json.dumps({
 })
 
 # send message to discord
-r = requests.post(hook_url, data=payload, headers={"content-type": "application/json"}
+r = requests.post(hook_url, data=payload, headers={"content-type": "application/json"})
 sys.exit(0)
