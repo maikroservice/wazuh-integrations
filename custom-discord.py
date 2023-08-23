@@ -2,7 +2,7 @@
 
 import sys
 import requests
-requests.auth import HTTPBasicAuth
+from requests.auth import HTTPBasicAuth
 
 """
 ossec.conf configuration structure
